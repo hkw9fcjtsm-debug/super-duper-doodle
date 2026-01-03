@@ -11,22 +11,20 @@ body {
   color: #111;
 }
 
-/* ====== APP WRAPPER ====== */
-.app {
-  min-height: 100vh;
-}
+/* ====== APP ====== */
+.app { min-height: 100vh; }
 
 /* ====== PAGES ====== */
 .page { min-height: 100vh; }
 .hidden { display: none !important; }
 
-/* ====== HEADERS (BASE) ====== */
+/* ====== HEADERS ====== */
 .header {
   width: 100%;
   padding: 18px 16px;
 }
 
-/* Page 1 header (basic) */
+/* INPUT PAGE */
 .header.basic {
   background: #ffffff;
   border-bottom: 1px solid rgba(0,0,0,0.08);
@@ -54,7 +52,6 @@ body {
   font-weight: 700;
   letter-spacing: 0.6px;
   font-size: 14px;
-  color: #111;
 }
 
 .subText {
@@ -63,19 +60,17 @@ body {
   font-size: 14px;
 }
 
-/* Page 2 header (dash) = screenshot vibe */
+/* DASHBOARD HEADER */
 .header.dash {
-  background: #C62828; /* Material red 700 */
+  background: #C62828;
   color: #fff;
   padding-top: calc(18px + env(safe-area-inset-top));
 }
 
-/* Top row inside dash header */
 .topRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
 }
 
 .pill {
@@ -102,36 +97,24 @@ body {
   font-weight: 500;
   font-size: 14px;
   padding: 8px 10px;
-  border-radius: 10px;
 }
-.linkBtn:active { opacity: 0.7; }
 
-/* Big greeting like screenshot */
+/* GREETING */
 .greeting {
   margin: 16px 0 6px;
   font-size: 36px;
   line-height: 1.15;
   font-weight: 300;
-  letter-spacing: 0.2px;
 }
 
-/* ====== CONTENT AREA ====== */
-.content {
-  padding: 16px;
-}
+/* ====== CONTENT ====== */
+.content { padding: 16px; }
+.dashContent { padding-top: 14px; }
 
-.dashContent {
-  padding-top: 14px;
-}
-
-/* ====== FORM FIELDS ====== */
-.field {
-  display: block;
-  margin: 12px 0;
-}
+/* ====== FORM ====== */
+.field { margin: 12px 0; }
 
 .label {
-  display: block;
   font-size: 13px;
   color: rgba(0,0,0,0.62);
   margin-bottom: 6px;
@@ -145,20 +128,6 @@ input, select {
   border: 1px solid rgba(0,0,0,0.12);
   padding: 10px 12px;
   font-size: 16px;
-  background: #fff;
-  outline: none;
-}
-
-input:focus, select:focus {
-  border-color: rgba(198,40,40,0.6);
-  box-shadow: 0 0 0 3px rgba(198,40,40,0.15);
-}
-
-/* Accounts wrap rows (JS can inject) */
-.accountsWrap {
-  margin-top: 10px;
-  display: grid;
-  gap: 10px;
 }
 
 /* ====== BUTTONS ====== */
@@ -171,7 +140,6 @@ input:focus, select:focus {
 .btn {
   height: 46px;
   border-radius: 14px;
-  padding: 0 14px;
   border: 0;
   font-weight: 700;
   font-size: 15px;
@@ -194,26 +162,10 @@ input:focus, select:focus {
   margin-top: 14px;
 }
 
-.btn:active { transform: translateY(1px); opacity: 0.95; }
-
-/* ====== MESSAGES / HINTS ====== */
-.hint {
-  margin-top: 12px;
-  color: rgba(0,0,0,0.65);
-  font-size: 13px;
-}
-
-.msg {
-  margin-top: 10px;
-  font-size: 13px;
-  color: rgba(0,0,0,0.65);
-}
-
 /* ====== DASHBOARD CARDS ====== */
 .cards {
   display: grid;
   gap: 12px;
-  margin-top: 6px;
 }
 
 .card {
@@ -226,36 +178,22 @@ input:focus, select:focus {
 
 .cardTop {
   display: flex;
-  align-items: baseline;
   justify-content: space-between;
-  gap: 10px;
+  align-items: baseline;
 }
 
+/* ✅ ACCOUNT TYPE — BOLD */
 .cardTitle {
-  font-weight: 700;
+  font-weight: 700;     /* Checking / Savings */
   font-size: 15px;
 }
 
+/* last 4 digits, misc */
 .cardMeta {
   font-size: 13px;
   color: rgba(0,0,0,0.6);
 }
 
+/* ✅ BALANCE — NOT BOLD */
 .balance {
-  margin-top: 10px;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 0.2px;
-}
-
-/* placeholder blank area */
-.blank {
-  height: 80px;
-}
-
-/* iOS safe area bottom spacing */
-.content::after {
-  content: "";
-  display: block;
-  height: env(safe-area-inset-bottom);
-}
+  margin-to
