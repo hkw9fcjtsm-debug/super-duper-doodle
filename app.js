@@ -1,239 +1,249 @@
-// ====== Storage rules ======
-const STORAGE_KEY = "placeholder_app_save_v1";
-const ONE_HOUR_MS = 60 * 60 * 1000;
-
-const $ = (id) => document.getElementById(id);
-
-function now() { return Date.now(); }
-
-function saveState(state){
-  const payload = { ...state, ts: now() };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+:root{
+  --bg: #f5f5f5;
+  --card: #ffffff;
+  --text: #111111;
+  --muted: #666666;
+  --brand: #b71c1c; /* PLACEHOLDER COLOR */
+  --brandText: #ffffff;
+  --border: rgba(0,0,0,0.08);
 }
 
-function loadState(){
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if(!raw) return null;
-  try{
-    const data = JSON.parse(raw);
-    if(!data.ts || now() - data.ts > ONE_HOUR_MS){
-      localStorage.removeItem(STORAGE_KEY);
-      return null;
-    }
-    return data;
-  }catch{
-    localStorage.removeItem(STORAGE_KEY);
-    return null;
-  }
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 
-function clearState(){
-  localStorage.removeItem(STORAGE_KEY);
+.app{ min-height:100%; }
+
+.page{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
-// ====== Helpers ======
-function msg(text){
-  $("msg").textContent = text || "";
+.hidden{ display:none; }
+
+/* ===== HEADERS ===== */
+
+.header{
+  padding:16px;
 }
 
-function formatMoney(cents){
-  const dollars = (cents / 100);
-  return dollars.toLocaleString(undefined, { style:"currency", currency:"USD" });
+.header.basic{
+  background:#111;
+  color:#fff;
 }
 
-function parseDollarsToCents(input){
-  const cleaned = String(input || "").trim().replace("$","");
-  if(!cleaned) return null;
-
-  // Accept "2", "2.4", "2.40", "0.89"
-  if(!/^\d+(\.\d{1,2})?$/.test(cleaned)) return null;
-
-  const parts = cleaned.split(".");
-  const whole = parseInt(parts[0], 10);
-  const frac = parts[1] ? parts[1].padEnd(2,"0") : "00";
-  return (whole * 100) + parseInt(frac, 10);
+.header.dash{
+  background:var(--brand);
+  color:var(--brandText);
+  padding-bottom:18px;
 }
 
-function generateUniqueLast4(used){
-  let n;
-  do {
-    n = Math.floor(1000 + Math.random() * 9000).toString();
-  } while(used.has(n));
-  used.add(n);
-  return n;
+.brandRow{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-// PLACEHOLDER account labels you can rename anytime
-function displayTypeFromSelect(sel){
-  return sel === "Checking" ? "Everyday Checking" : "Way2Save Savings";
+.logoBox{
+  width:44px;
+  height:44px;
+  border-radius:10px;
+  background:#333;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
 }
 
-// ====== UI builders ======
-function buildAccountBlocks(count, existingAccounts=null){
-  const wrap = $("accountsWrap");
-  wrap.innerHTML = "";
-
-  for(let i=0;i<count;i++){
-    const block = document.createElement("div");
-    block.className = "accountBlock";
-
-    block.innerHTML = `
-      <div class="label" style="font-weight:700;color:#333;">Account ${i+1}</div>
-
-      <label class="field">
-        <span class="label">Account type</span>
-        <select class="type">
-          <option>Checking</option>
-          <option>Savings</option>
-        </select>
-      </label>
-
-      <label class="field">
-        <span class="label">Account number (last 4 or random)</span>
-        <input class="last4" type="text" placeholder="1234 or random" autocomplete="off" />
-      </label>
-
-      <label class="field">
-        <span class="label">Balance (dollars and cents)</span>
-        <input class="balance" type="text" inputmode="decimal" placeholder="2.41" autocomplete="off" />
-      </label>
-    `;
-
-    // restore existing values if provided
-    if(existingAccounts && existingAccounts[i]){
-      const a = existingAccounts[i];
-      block.querySelector(".type").value = a.typeRaw;
-      block.querySelector(".last4").value = a.lastFour;
-      block.querySelector(".balance").value = (a.balanceCents/100).toFixed(2);
-    }
-
-    wrap.appendChild(block);
-  }
+.brandText{
+  font-weight:700;
 }
 
-function showInput(){
-  $("pageInput").classList.remove("hidden");
-  $("pageDash").classList.add("hidden");
+.subText{
+  margin-top:8px;
+  color:#ddd;
+  font-size:13px;
 }
 
-function showDash(){
-  $("pageInput").classList.add("hidden");
-  $("pageDash").classList.remove("hidden");
+/* ===== TOP ROW ===== */
+
+.topRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
 }
 
-function renderDashboard(name, accounts){
-  $("greeting").textContent = `Good evening, ${name || "Name"}`;
-
-  const cards = $("cards");
-  cards.innerHTML = "";
-
-  accounts.forEach((a) => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <div class="cardTop">${a.typeDisplay.toUpperCase()} …${a.lastFour}</div>
-      <div class="balance">${formatMoney(a.balanceCents)}</div>
-      <div class="avail">Available balance</div>
-    `;
-    cards.appendChild(card);
-  });
+.pill{
+  background:rgba(255,255,255,0.2);
+  border:1px solid rgba(255,255,255,0.25);
+  color:#fff;
+  padding:10px 12px;
+  border-radius:999px;
+  font-size:14px;
+  flex:1;
 }
 
-// ====== App logic ======
-function collectAccounts(count){
-  const blocks = Array.from(document.querySelectorAll(".accountBlock"));
-  const used = new Set();
-  const accounts = [];
-
-  for(let i=0;i<count;i++){
-    const b = blocks[i];
-    const typeRaw = b.querySelector(".type").value;
-    const last4Raw = b.querySelector(".last4").value.trim();
-    const balRaw = b.querySelector(".balance").value.trim();
-
-    let lastFour = last4Raw.toLowerCase() === "random"
-      ? generateUniqueLast4(used)
-      : last4Raw;
-
-    if(!/^\d{4}$/.test(lastFour)){
-      return { error: `Account ${i+1}: last 4 must be 4 digits (or type random)` };
-    }
-    if(used.has(lastFour)){
-      return { error: `Account ${i+1}: duplicate last 4` };
-    }
-    used.add(lastFour);
-
-    const cents = parseDollarsToCents(balRaw);
-    if(cents === null){
-      return { error: `Account ${i+1}: balance must be like 2.41` };
-    }
-
-    accounts.push({
-      typeRaw,
-      typeDisplay: displayTypeFromSelect(typeRaw),
-      lastFour,
-      balanceCents: cents
-    });
-  }
-  return { accounts };
+.topActions{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-// ====== Wire up ======
-document.addEventListener("DOMContentLoaded", () => {
-  const saved = loadState();
+.icon{
+  font-size:18px;
+}
 
-  const countSel = $("count");
-  countSel.addEventListener("change", () => {
-    const c = parseInt(countSel.value, 10);
-    buildAccountBlocks(c);
-  });
+.linkBtn{
+  background:transparent;
+  border:0;
+  color:#fff;
+  font-size:14px;
+  padding:8px 6px;
+}
 
-  // restore if saved (and not expired)
-  if(saved){
-    $("name").value = saved.name || "";
-    $("count").value = String(saved.count || 1);
-    buildAccountBlocks(saved.count || 1, saved.accounts || []);
-  } else {
-    buildAccountBlocks(1);
-  }
+/* ===== TEXT ===== */
 
-  $("btnReset").addEventListener("click", () => {
-    clearState();
-    $("name").value = "";
-    $("count").value = "1";
-    buildAccountBlocks(1);
-    msg("Reset complete.");
-  });
+.greeting{
+  margin:14px 0 0;
+  font-size:34px;
+  line-height:1.05;
+  font-weight:800;
+}
 
-  $("btnEnter").addEventListener("click", () => {
-    msg("");
+.content{
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
 
-    const name = $("name").value.trim();
-    if(!name){
-      msg("Enter name.");
-      return;
-    }
+/* ===== FORMS ===== */
 
-    const count = parseInt($("count").value, 10);
-    const result = collectAccounts(count);
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
 
-    if(result.error){
-      msg(result.error);
-      return;
-    }
+.label{
+  font-size:13px;
+  color:var(--muted);
+}
 
-    const state = { name, count, accounts: result.accounts };
-    saveState(state);
+input,select{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#fff;
+  font-size:16px;
+  outline:none;
+}
 
-    renderDashboard(name, result.accounts);
-    showDash();
-  });
+.accountsWrap{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
 
-  $("btnBack").addEventListener("click", () => {
-    showInput();
-  });
+.accountBlock{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
 
-  $("btnSignOff").addEventListener("click", () => {
-    showInput();
-  });
-});
+/* ===== BUTTONS ===== */
+
+.buttonsRow{
+  display:flex;
+  gap:12px;
+  margin-top:6px;
+}
+
+.btn{
+  border:0;
+  border-radius:12px;
+  padding:12px 14px;
+  font-size:16px;
+}
+
+.btn.primary{
+  background:var(--brand);
+  color:#fff;
+  font-weight:700;
+  flex:1;
+}
+
+.btn.secondary{
+  background:#e9e9e9;
+  color:#111;
+  font-weight:700;
+  flex:1;
+}
+
+.btn.full{
+  width:100%;
+}
+
+.hint{
+  margin:0;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.msg{
+  margin:0;
+  font-size:13px;
+  color:#b00020;
+  min-height:18px;
+}
+
+/* ===== DASHBOARD ===== */
+
+.cards{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
+}
+
+.cardTop{
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+}
+
+.balance{
+  font-size:40px;
+  font-weight:800;
+  margin-top:10px;
+}
+
+.avail{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.blank{
+  height:320px;
+}
