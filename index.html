@@ -1,115 +1,82 @@
-<div class="card card--open-account">
-  <div class="card__top">
-    <div class="card__title">Open an account</div>
-    <div class="card__cta">Explore all <span class="chev">›</span></div>
-  </div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Placeholder App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
 
-  <div class="grid4">
-    <div class="tile">
-      <div class="tile__icon">
-        <!-- Phone + card -->
-        <svg viewBox="0 0 64 64" class="icon" aria-hidden="true">
-          <defs>
-            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#A78BFA"/>
-              <stop offset="1" stop-color="#7C3AED"/>
-            </linearGradient>
-            <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#FDE68A"/>
-              <stop offset="1" stop-color="#F59E0B"/>
-            </linearGradient>
-          </defs>
-          <rect x="14" y="10" width="26" height="44" rx="6" fill="url(#g1)"/>
-          <rect x="19" y="16" width="16" height="28" rx="3" fill="#ffffff" opacity=".92"/>
-          <rect x="22" y="46" width="10" height="2.6" rx="1.3" fill="#ffffff" opacity=".85"/>
-          <rect x="30" y="28" width="26" height="18" rx="5" fill="url(#g2)"/>
-          <rect x="34" y="33" width="18" height="2.6" rx="1.3" fill="#ffffff" opacity=".85"/>
-        </svg>
-      </div>
-      <div class="tile__label">Checking</div>
-    </div>
+    <!-- PAGE 1: INPUT -->
+    <section id="pageInput" class="page">
+      <header class="header basic">
+        <div class="brandRow">
+          <div class="logoBox">LOGO</div> <!-- PLACEHOLDER -->
+          <div class="brandText">PLACEHOLDER APP</div> <!-- PLACEHOLDER -->
+        </div>
+        <div class="subText">Enter info below</div>
+      </header>
 
-    <div class="tile">
-      <div class="tile__icon">
-        <!-- Wallet + coins -->
-        <svg viewBox="0 0 64 64" class="icon" aria-hidden="true">
-          <defs>
-            <linearGradient id="w1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#FB7185"/>
-              <stop offset="1" stop-color="#F43F5E"/>
-            </linearGradient>
-            <linearGradient id="w2" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#C4B5FD"/>
-              <stop offset="1" stop-color="#8B5CF6"/>
-            </linearGradient>
-            <linearGradient id="c1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#FDE68A"/>
-              <stop offset="1" stop-color="#F59E0B"/>
-            </linearGradient>
-          </defs>
-          <circle cx="44" cy="16" r="8" fill="url(#c1)"/>
-          <circle cx="52" cy="24" r="6" fill="url(#c1)" opacity=".95"/>
-          <rect x="10" y="24" width="44" height="26" rx="8" fill="url(#w1)"/>
-          <rect x="10" y="20" width="34" height="12" rx="6" fill="url(#w2)"/>
-          <rect x="40" y="32" width="14" height="12" rx="6" fill="#111827" opacity=".12"/>
-          <circle cx="47" cy="38" r="2.2" fill="#111827" opacity=".25"/>
-        </svg>
-      </div>
-      <div class="tile__label">Savings<br>&amp; CDs</div>
-    </div>
+      <div class="content">
+        <label class="field">
+          <span class="label">Name</span>
+          <input id="name" type="text" placeholder="Name" autocomplete="off" />
+        </label>
 
-    <div class="tile">
-      <div class="tile__icon">
-        <!-- Credit cards -->
-        <svg viewBox="0 0 64 64" class="icon" aria-hidden="true">
-          <defs>
-            <linearGradient id="cc1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#F97316"/>
-              <stop offset="1" stop-color="#FB7185"/>
-            </linearGradient>
-            <linearGradient id="cc2" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#60A5FA"/>
-              <stop offset="1" stop-color="#2563EB"/>
-            </linearGradient>
-          </defs>
-          <rect x="12" y="18" width="42" height="26" rx="8" fill="url(#cc2)"/>
-          <rect x="18" y="24" width="30" height="4" rx="2" fill="#fff" opacity=".85"/>
-          <rect x="12" y="22" width="42" height="26" rx="8" fill="url(#cc1)" transform="translate(-6 10)"/>
-          <rect x="18" y="40" width="26" height="3.5" rx="1.75" fill="#fff" opacity=".85"/>
-          <rect x="18" y="34" width="10" height="6" rx="2" fill="#fff" opacity=".7"/>
-        </svg>
-      </div>
-      <div class="tile__label">Credit<br>cards</div>
-    </div>
+        <label class="field">
+          <span class="label"># of accounts</span>
+          <select id="count">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </label>
 
-    <div class="tile">
-      <div class="tile__icon">
-        <!-- House -->
-        <svg viewBox="0 0 64 64" class="icon" aria-hidden="true">
-          <defs>
-            <linearGradient id="h1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#93C5FD"/>
-              <stop offset="1" stop-color="#60A5FA"/>
-            </linearGradient>
-            <linearGradient id="h2" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#34D399"/>
-              <stop offset="1" stop-color="#22C55E"/>
-            </linearGradient>
-            <linearGradient id="roof" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#F87171"/>
-              <stop offset="1" stop-color="#EF4444"/>
-            </linearGradient>
-          </defs>
-          <rect x="10" y="34" width="10" height="14" rx="4" fill="url(#h2)"/>
-          <rect x="44" y="34" width="10" height="14" rx="4" fill="url(#h2)"/>
-          <polygon points="14,34 32,18 50,34" fill="url(#roof)"/>
-          <rect x="18" y="30" width="28" height="24" rx="8" fill="url(#h1)"/>
-          <rect x="30" y="40" width="8" height="14" rx="3" fill="#111827" opacity=".14"/>
-          <rect x="22" y="38" width="6" height="6" rx="2" fill="#fff" opacity=".8"/>
-          <rect x="40" y="38" width="6" height="6" rx="2" fill="#fff" opacity=".8"/>
-        </svg>
+        <div id="accountsWrap" class="accountsWrap"></div>
+
+        <div class="buttonsRow">
+          <button id="btnReset" class="btn secondary" type="button">Reset</button>
+          <button id="btnEnter" class="btn primary" type="button">Enter</button>
+        </div>
+
+        <p class="hint">Tip: type <b>random</b> for last 4 digits.</p>
+        <p id="msg" class="msg" aria-live="polite"></p>
       </div>
-      <div class="tile__label">Loans</div>
-    </div>
-  </div>
-</div>
+    </section>
+
+    <!-- PAGE 2: DASHBOARD -->
+    <section id="pageDash" class="page hidden">
+      <header class="header dash">
+        <div class="topRow">
+          <div class="pill">Need help?</div> <!-- PLACEHOLDER -->
+          <div class="topActions">
+            <span class="icon">🔔</span> <!-- PLACEHOLDER -->
+            <button id="btnSignOff" class="linkBtn" type="button">Sign off</button>
+          </div>
+        </div>
+
+        <h1 id="greeting" class="greeting">Good evening, Name</h1>
+      </header>
+
+      <div class="content dashContent">
+        <div id="cards" class="cards"></div>
+
+        <!-- BLANK AREA PLACEHOLDER (your “junk” goes here) -->
+        <div class="blank">
+          <!-- Leave blank on purpose -->
+        </div>
+
+        <button id="btnBack" class="btn secondary full" type="button">Back</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
