@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Placeholder App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+
+    <!-- PAGE 1 -->
+    <section id="pageInput" class="page">
+      <header class="header basic">
+        <div class="brandRow">
+          <div class="logoBox">LOGO</div>
+          <div class="brandText">PLACEHOLDER APP</div>
+        </div>
+        <div class="subText">Enter info below</div>
+      </header>
+
+      <div class="content">
+        <label class="field">
+          <span class="label">Name</span>
+          <input id="name" type="text" placeholder="Name" autocomplete="off" />
+        </label>
+
+        <label class="field">
+          <span class="label"># of accounts</span>
+          <select id="count">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </label>
+
+        <div id="accountsWrap" class="accountsWrap"></div>
+
+        <div class="buttonsRow">
+          <button id="btnReset" class="btn secondary" type="button">Reset</button>
+          <button id="btnEnter" class="btn primary" type="button">Enter</button>
+        </div>
+
+        <p class="hint">Tip: type <b>random</b> for last 4 digits.</p>
+        <p id="msg" class="msg"></p>
+      </div>
+    </section>
+
+    <!-- PAGE 2 -->
+    <section id="pageDash" class="page hidden">
+      <header class="header dash">
+        <div class="topRow">
+          <div class="pill">Need help?</div>
+          <div class="topActions">
+            <span class="icon">🔔</span>
+            <button id="btnSignOff" class="linkBtn" type="button">Sign off</button>
+          </div>
+        </div>
+
+        <h1 id="greeting" class="greeting">Good evening, Name</h1>
+      </header>
+
+      <div class="content dashContent">
+        <div id="cards" class="cards"></div>
+
+        <!-- BLANK SPACE -->
+        <div class="blank"></div>
+
+        <button id="btnBack" class="btn secondary full" type="button">Back</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
